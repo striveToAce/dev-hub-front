@@ -22,7 +22,7 @@ const Header = () => {
             DevHub
           </span>
         </div>
-        <div className="flex gap-x-2 items-center text-rose-500 font-medium gap-x-4">
+        <div className="flex gap-x-2 items-center text-rose-500 font-medium gap-x-4 flex-wrap">
             <div className="cursor-pointer">About</div>
             <div className="cursor-pointer">Feeds</div>
             <div className="cursor-pointer">Followers</div>
