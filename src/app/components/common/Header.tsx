@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Header = () => {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -19,16 +21,17 @@ const Header = () => {
             />
           </svg>
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            DevHub
+          <Link href="/home">DevHub</Link>
           </span>
         </div>
         <div className="flex gap-x-2 items-center text-rose-500 font-medium gap-x-4 flex-wrap">
-            <div className="cursor-pointer">About</div>
-            <div className="cursor-pointer">Feeds</div>
-            <div className="cursor-pointer">Followers</div>
-            <div className="cursor-pointer">Login</div>
-            <div className="cursor-pointer">My Profile</div>
-
+          <div className="cursor-pointer">About</div>
+          <div className="cursor-pointer">Feeds</div>
+          <div className="cursor-pointer">Followers</div>
+          <div className="cursor-pointer">
+            <Link href="/auth/login">Login</Link>
+          </div>
+          <div className="cursor-pointer">My Profile</div>
         </div>
       </div>
     </nav>
