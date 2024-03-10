@@ -15,3 +15,7 @@ export const offerings = [
       "Access in-depth articles, tutorials, and expert insights to sharpen your skills, learn new technologies, and stay ahead in the rapidly evolving world of development.",
   },
 ];
+
+export const userImages = [
+  "https://d39ubr28bcomsg.cloudfront.net/2024/3/4/professional-finance-bg.1709589849739.png",
+];

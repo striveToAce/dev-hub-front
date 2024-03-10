@@ -31,7 +31,7 @@ const Header = () => {
           <div className="cursor-pointer">
             <Link href="/auth/login">Login</Link>
           </div>
-          <div className="cursor-pointer">My Profile</div>
+          <div className="cursor-pointer"><Link href="/profile">My Profile</Link></div>
         </div>
       </div>
     </nav>

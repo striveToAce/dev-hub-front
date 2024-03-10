@@ -12,7 +12,7 @@ const SignupForm = () => {
   });
 
   // Define onSubmit function to handle form submission
-  const onSubmit = (values) => {
+  const onSubmit = (values:any) => {
     console.log(values); // You can handle form submission here
   };
 
