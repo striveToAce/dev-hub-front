@@ -29,7 +29,16 @@ export async function POST(request: Request) {
       );
     else if (data[0].password !== body.password)
       return responseHandler(0, {}, status, "wrong cred found!");
-    else return responseHandler(1, {}, status, "login success!");
+    else {
+      
+      const {error} = await supabase.auth.signInWithPassword({
+        email: body.email,
+        password: body.password,
+      });
+      if(error) return responseHandler(0, {}, 500, "something went wrong!");
+      
+      return responseHandler(1, {}, status, "login success!");
+    }
   } catch (err) {
     return responseHandler(0, {}, 500, "something went wrong!");
   }
