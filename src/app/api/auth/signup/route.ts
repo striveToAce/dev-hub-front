@@ -35,6 +35,12 @@ export async function POST(request: Request) {
         "you are already on DevHub! login please"
       );
     const { data, error, status } = await supabase.from("users").insert(payload);
+    if(!error){
+      await supabase.auth.signUp({
+        email: body.email,
+        password: body.password,
+      })
+    }
     if (error) return responseHandler(0, {}, status, "something went wrong!");
     else return responseHandler(1, {}, status, "signup success!");
   } catch (err) {
