@@ -13,7 +13,6 @@ const responseHandler = (status: any, data: any, code: any, message: any) => {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    console.log(body);
     const payload = {
       full_name: body.fullName,
       current_position: body.currentPosition,

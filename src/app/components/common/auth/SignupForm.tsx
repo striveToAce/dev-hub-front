@@ -2,8 +2,14 @@
 import { useFormik } from "formik";
 import * as Yup from "yup"; // Import Yup for form validation
 import Link from "next/link";
+import axios from "axios";
+import Toast from "../Toast";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
+  const [toastState, setToastState] = useState(null);
+  const router = useRouter();
   // Define validation schema using Yup
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email address").required("Required"),
@@ -13,8 +19,29 @@ const SignupForm = () => {
   });
 
   // Define onSubmit function to handle form submission
-  const onSubmit = (values: any) => {
-    console.log(values); // You can handle form submission here
+  const onSubmit = async (values: any) => {
+    console.log("hello world");
+    try {
+      const signUpResponse = await axios.post("/api/auth/signup", values);
+      if (signUpResponse?.data?.status) {
+        setToastState({
+          message: "Welcome to DevHub",
+          isSuccess: true,
+        });
+        setTimeout(() => {
+          setToastState(null);
+          router.push("/auth/login");
+        }, 1000);
+      } else {
+        setToastState({
+          message: signUpResponse?.data?.message,
+          isSuccess: false,
+        });
+        setTimeout(() => {
+          setToastState(null);
+        }, 500);
+      }
+    } catch (err) {}
   };
 
   // Initialize useFormik hook with form configuration
@@ -33,7 +60,13 @@ const SignupForm = () => {
     console.log(formik.values, formik.errors);
   }
   return (
-    <form className="max-w-sm mx-auto">
+    <div className="max-w-sm mx-auto">
+      {toastState?.message ? (
+        <Toast
+          message={toastState?.message}
+          isSuccess={toastState?.isSuccess}
+        />
+      ) : null}
       <div className="mb-5">
         <label
           htmlFor="email"
@@ -82,7 +115,7 @@ const SignupForm = () => {
           type="text"
           id="base-input"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          name="fullName"
+          name="currentPosition"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.currentPosition}
@@ -109,6 +142,7 @@ const SignupForm = () => {
         />
       </div>
       <button
+        type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         onClick={() => formik.handleSubmit()}
       >
@@ -117,7 +151,7 @@ const SignupForm = () => {
       <div className="text-blue-500 cursor-pointer my-2">
         <Link href="/auth/login">Login</Link>
       </div>
-    </form>
+    </div>
   );
 };
 export default SignupForm;

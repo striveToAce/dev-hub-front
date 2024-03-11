@@ -32,7 +32,7 @@ const WhatWeOfferCard = ({ content }: any) => {
               <path
                 stroke="currentColor"
                 stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
                 strokeWidth="2"
                 d="M19 12H5m14 0-4 4m4-4-4-4"
               />
