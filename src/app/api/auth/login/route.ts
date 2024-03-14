@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       return responseHandler(0, {}, status, "wrong cred found!");
     else {
       
-      const {error} = await supabase.auth.signInWithPassword({
+      const {data,error} = await supabase.auth.signInWithPassword({
         email: body.email,
         password: body.password,
       });
