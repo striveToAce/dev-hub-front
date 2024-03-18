@@ -52,7 +52,7 @@ const ProfileCard = () => {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M17 8H5m12 0c.6 0 1 .4 1 1v2.6M17 8l-4-4M5 8a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-2.6M5 8l4-4 4 4m6 4h-4a2 2 0 1 0 0 4h4c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1Z"
@@ -98,25 +98,3 @@ const ProfileCard = () => {
   );
 };
 export default ProfileCard;
-
-/*
-
-profile  logo
-<img className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/docs/images/people/profile-picture-5.jpg" alt="Bordered avatar">
-
-
-firstLett lastLeter
-
-<div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-    <span className="font-medium text-gray-600 dark:text-gray-300">JL</span>
-</div>
-
-
-
-
-online
-<div className="relative">
-    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="">
-    <span className="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>
-*/

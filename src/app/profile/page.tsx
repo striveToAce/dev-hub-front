@@ -4,7 +4,7 @@ import axios from "axios";
 import ProfileCard from "../components/profile/ProfileCard";
 import { useEffect, useState } from "react";
 
-const Profile = async () => {
+const Profile = () => {
   const [profileDetails, setProfileDetails] = useState(null);
   const getProfileDetails = async () => {
     try {
