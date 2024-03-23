@@ -36,7 +36,6 @@ export async function POST(request: Request) {
         password: body.password,
       });
       if(error) return responseHandler(0, {}, 500, "something went wrong!");
-      
       return responseHandler(1, {}, status, "login success!");
     }
   } catch (err) {
