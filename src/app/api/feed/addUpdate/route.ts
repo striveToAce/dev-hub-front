@@ -25,9 +25,7 @@ export async function POST(request: Request) {
     const createdFeeds = await supabase.from("feeds").insert(payload);
     if (createdFeeds?.error)
       return responseHandler(0, {}, 500, "something went wrong!");
-    else if (createdFeeds?.data)
-      return responseHandler(0, createdFeeds?.data, 201, "Great! feed added");
-    return responseHandler(0, {}, 500, "something went wrong!");
+    return responseHandler(0, createdFeeds?.data, 201, "Great! feed added");
   } catch (err) {
     if (err?.unauth) return responseHandler(0, {}, 401, "unauthorised!");
     return responseHandler(0, {}, 500, "something went wrong!");
