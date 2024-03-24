@@ -24,7 +24,6 @@ const FeedForm = () => {
 
   // Define onSubmit function to handle form submission
   const onSubmit = async (values: any) => {
-    console.log("__hello___");
     setLoading(true);
     const signUpResponse = await axios.post("/api/feed/addUpdate", values);
     setLoading(false);

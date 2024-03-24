@@ -1,7 +1,25 @@
 import Link from "next/link";
 import FeedCard from "../components/feeds/FeedCard";
 
-const Feeds = () => {
+const getFeeds = async () => {
+  const feedResponse = await fetch("http://localhost:3000/api/feed/list", {
+    method: "POST",
+    body: JSON.stringify({
+      page: 1,
+      pagesize: 10,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+  const resData = await feedResponse.json();
+  return resData?.data || [];
+};
+const Feeds = async () => {
+  /* get feeds */
+  const feeds = await getFeeds();
+
   return (
     <div>
       <Link href="feeds/create">
@@ -13,12 +31,9 @@ const Feeds = () => {
         </button>
       </Link>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 m-2">
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
+        {feeds.map((fd:any) => (
+          <FeedCard key={fd.id} feed={fd} />
+        ))}
       </div>
     </div>
   );

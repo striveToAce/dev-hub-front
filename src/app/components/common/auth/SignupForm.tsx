@@ -20,7 +20,7 @@ const SignupForm = () => {
 
   // Define onSubmit function to handle form submission
   const onSubmit = async (values: any) => {
-    console.log("hello world");
+  
     try {
       const signUpResponse = await axios.post("/api/auth/signup", values);
       if (signUpResponse?.data?.status) {
