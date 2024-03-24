@@ -4,8 +4,8 @@ const FeedCard = ({ feed }:any) => {
   return (
     <div className="block max-w-sm p-6 bg-white border border-gray-200 shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <div>
-        <div className="text-2xl font-semibold">{feed.title}</div>
-        <div className="text-xl text-gray-400">{feed.description}</div>
+        <div className="text-2xl font-semibold line-clamp-2">{feed.title}</div>
+        <div className="text-base text-gray-400 line-clamp-3">{feed.description}</div>
         <div className="text-blue-600 text-xs font-semibold cursor-pointer">
           view in detail
         </div>

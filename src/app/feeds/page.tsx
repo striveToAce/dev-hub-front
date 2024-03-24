@@ -1,12 +1,15 @@
 import Link from "next/link";
 import FeedCard from "../components/feeds/FeedCard";
+import { getAccessToken } from "@/utils/supabase/server";
 
 const getFeeds = async () => {
+  const accessT = await getAccessToken();
   const feedResponse = await fetch("http://localhost:3000/api/feed/list", {
     method: "POST",
     body: JSON.stringify({
       page: 1,
       pagesize: 10,
+      token: accessT,
     }),
     headers: {
       "Content-Type": "application/json",

@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const startIndex = (page - 1) * pagesize;
     const endIndex = startIndex + pagesize - 1;
     const supabase = createClient();
-    await getUser(request);
+    await getUser(body?.token);
     const { data, error } = await supabase
       .from("feeds")
       .select("*")

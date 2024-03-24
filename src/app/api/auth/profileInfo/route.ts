@@ -11,10 +11,11 @@ const responseHandler = (status: any, data: any, code: any, message: any) => {
   });
 };
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
+    const body = await request.json()
     const supabase = createClient();
-    const currentUser = await getUser(request);
+    const currentUser = await getUser(body.token);
     const { data, error, status } = await supabase
       .from("users")
       .select()

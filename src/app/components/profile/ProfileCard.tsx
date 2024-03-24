@@ -1,14 +1,18 @@
 "use client";
 import { userImages } from "@/utils/constants";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const ProfileCard = ({ profile }: any) => {
+  const plan = profile?.plan;
   const [selectedLimit, setSelectedLimit] = useState(0);
+  const planColor = useMemo(() => {
+    return plan == 0 ? "red" : plan == 1 ? "orange" : "green";
+  }, [profile?.plan]);
   const limitLabels = ["Read feeds", "Write feeds", "Write feeds (ad)"];
   const limits = [
-    "You have 50 reading feeds limit",
-    "You have 40 writing feeds (non advertised) limit",
-    "You have 30 writing feeds (advertised) limit",
+    `You have ${profile.rfc} reading feeds limit`,
+    `You have ${profile.wfc} writing feeds (non advertised) limit`,
+    `You have ${profile.wfac} writing feeds (advertised) limit`,
   ];
 
   return (
@@ -35,7 +39,9 @@ const ProfileCard = ({ profile }: any) => {
             <div className="flex justify-between mb-2">
               <div>
                 <span>Credits</span>:{" "}
-                <span className="font-semibold text-rose-500">250</span>
+                <span className="font-semibold text-rose-500">
+                  {profile.credits}
+                </span>
               </div>
 
               <div>
@@ -64,8 +70,10 @@ const ProfileCard = ({ profile }: any) => {
             </div>
             <div>
               <span>Plan</span>:{" "}
-              <span className="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
-                Red
+              <span
+                className={`bg-${planColor}-100 text-${planColor}-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-${planColor}-900 dark:text-${planColor}-300`}
+              >
+                {planColor.toUpperCase()}
               </span>
             </div>
             {/* content limit remaining */}

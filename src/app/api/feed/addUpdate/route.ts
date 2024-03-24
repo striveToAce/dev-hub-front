@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { getUser } from "../../middleware";
+import { cookies } from 'next/headers'
 
 const responseHandler = (status: any, data: any, code: any, message: any) => {
   return NextResponse.json({
@@ -16,7 +17,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const supabase = createClient();
     /*___auth___*/
-    let loggedInUser = await getUser(request);
+    let loggedInUser = await getUser(body?.token);
 
     /*___payload manipulation___*/
     const payload = { ...body, userId: loggedInUser.id };

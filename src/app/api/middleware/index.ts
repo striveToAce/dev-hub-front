@@ -1,11 +1,10 @@
 import { createClient } from "@/utils/supabase/server";
-async function getUser(req) {
+import { cookies } from "next/headers";
+async function getUser(token: string) {
   const supabase = createClient();
-  const token = req?.headers?.token;
-  if(token){
-    console.log(token,"tkn")
-  }
-  const getUserResponse = await supabase.auth.getUser();
+  const getUserResponse = token
+    ? await supabase.auth.getUser(token)
+    : await supabase.auth.getUser();
   if (getUserResponse?.error)
     return Promise.reject({
       unauth: true,
