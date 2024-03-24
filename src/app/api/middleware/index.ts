@@ -1,6 +1,10 @@
 import { createClient } from "@/utils/supabase/server";
-async function getUser() {
+async function getUser(req) {
   const supabase = createClient();
+  const token = req?.headers?.token;
+  if(token){
+    console.log(token,"tkn")
+  }
   const getUserResponse = await supabase.auth.getUser();
   if (getUserResponse?.error)
     return Promise.reject({

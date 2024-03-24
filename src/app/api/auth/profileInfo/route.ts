@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { getUser } from "../../middleware";
 
 const responseHandler = (status: any, data: any, code: any, message: any) => {
   return NextResponse.json({
@@ -13,14 +14,11 @@ const responseHandler = (status: any, data: any, code: any, message: any) => {
 export async function GET(request: Request) {
   try {
     const supabase = createClient();
-    const {data:dta,error:er} = await supabase.auth.getUser()
-    if (er) return responseHandler(0, {}, 500, "something went wrong!");
-    const currentUser = dta?.user
+    const currentUser = await getUser(request);
     const { data, error, status } = await supabase
       .from("users")
       .select()
       .eq("email", currentUser?.email);
-
     if (error) return responseHandler(0, {}, status, "something went wrong!");
     else if (!data?.length)
       return responseHandler(0, {}, 401, "unauthorised access");
@@ -30,7 +28,6 @@ export async function GET(request: Request) {
       return responseHandler(1, user, status, "login success!");
     }
   } catch (err) {
-    console.log(err)
     return responseHandler(0, {}, 500, "something went wrong!");
   }
 }

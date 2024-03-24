@@ -17,8 +17,8 @@ export async function POST(request: Request) {
     const { page, pagesize } = body;
     const startIndex = (page - 1) * pagesize;
     const endIndex = startIndex + pagesize - 1;
-
     const supabase = createClient();
+    await getUser(request);
     const { data, error } = await supabase
       .from("feeds")
       .select("*")
@@ -27,6 +27,7 @@ export async function POST(request: Request) {
     if (error) return responseHandler(0, {}, 500, "something went wrong!");
     return responseHandler(1, data, 200, "Data fetched successfully");
   } catch (err) {
+    console.log(err)
     return responseHandler(0, {}, 500, "something went wrong!");
   }
 }

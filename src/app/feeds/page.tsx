@@ -11,10 +11,11 @@ const getFeeds = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-store",
+    next: { revalidate: 0 },
   });
   const resData = await feedResponse.json();
-  return resData?.data || [];
+  if (resData.status) return resData?.data || [];
+  else return [];
 };
 const Feeds = async () => {
   /* get feeds */
@@ -31,7 +32,7 @@ const Feeds = async () => {
         </button>
       </Link>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 m-2">
-        {feeds.map((fd:any) => (
+        {feeds.map((fd: any) => (
           <FeedCard key={fd.id} feed={fd} />
         ))}
       </div>

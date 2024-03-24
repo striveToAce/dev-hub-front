@@ -8,7 +8,6 @@ export async function getData() {
 
 async function Ssc() {
   const result = await getData();
-  console.log(result, "_***__");
   return (
     <div>
       {result?.facts?.map((fct) => (

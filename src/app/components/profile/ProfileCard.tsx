@@ -2,7 +2,7 @@
 import { userImages } from "@/utils/constants";
 import { useState } from "react";
 
-const ProfileCard = () => {
+const ProfileCard = ({ profile }: any) => {
   const [selectedLimit, setSelectedLimit] = useState(0);
   const limitLabels = ["Read feeds", "Write feeds", "Write feeds (ad)"];
   const limits = [
@@ -22,10 +22,10 @@ const ProfileCard = () => {
           />
           <div className="flex flex-col gap-1">
             <div className="text-xl font-medium text-gray-900 dark:text-white">
-              Bonnie Green
+              {profile.fullName}
             </div>
             <div className="text-sm text-gray-500 dark:text-gray-400">
-              Visual Designer
+              {profile.currentPosition}
             </div>
           </div>
         </div>

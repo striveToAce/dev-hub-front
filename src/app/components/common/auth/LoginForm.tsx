@@ -51,7 +51,6 @@ const LoginForm = () => {
     validationSchema: validationSchema,
     onSubmit: onSubmit,
   });
-  console.log(formik.values, formik.errors)
 
   return (
     <div className="max-w-sm mx-auto">

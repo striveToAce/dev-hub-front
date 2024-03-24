@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const supabase = createClient();
     /*___auth___*/
-    let loggedInUser = await getUser();
+    let loggedInUser = await getUser(request);
 
     /*___payload manipulation___*/
     const payload = { ...body, userId: loggedInUser.id };
