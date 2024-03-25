@@ -7,7 +7,7 @@ const ProfileCard = ({ profile }: any) => {
   const [selectedLimit, setSelectedLimit] = useState(0);
   const planColor = useMemo(() => {
     return plan == 0 ? "red" : plan == 1 ? "orange" : "green";
-  }, [profile?.plan]);
+  }, [plan]);
   const limitLabels = ["Read feeds", "Write feeds", "Write feeds (ad)"];
   const limits = [
     `You have ${profile.rfc} reading feeds limit`,

@@ -1,31 +1,11 @@
 import Link from "next/link";
+import { getFeeds } from "../actions/feeds";
 import FeedCard from "../components/feeds/FeedCard";
-import { getAccessToken } from "@/utils/supabase/server";
-
-const getFeeds = async () => {
-  const accessT = await getAccessToken();
-  const feedResponse = await fetch("http://localhost:3000/api/feed/list", {
-    method: "POST",
-    body: JSON.stringify({
-      page: 1,
-      pagesize: 10,
-      token: accessT,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    next: { revalidate: 0 },
-  });
-  const resData = await feedResponse.json();
-  if (resData.status) return resData?.data || [];
-  else return [];
-};
+import FeedList from "../components/feeds/List";
 const Feeds = async () => {
-  /* get feeds */
-  const feeds = await getFeeds();
-
+  const feeds = await getFeeds(1, 6);
   return (
-    <div>
+    <>
       <Link href="feeds/create">
         <button
           type="button"
@@ -39,7 +19,8 @@ const Feeds = async () => {
           <FeedCard key={fd.id} feed={fd} />
         ))}
       </div>
-    </div>
+      <FeedList />
+    </>
   );
 };
 export default Feeds;

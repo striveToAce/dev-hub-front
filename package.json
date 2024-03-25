@@ -14,9 +14,11 @@
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.7.2",
     "formik": "^2.4.5",
+    "framer-motion": "^11.0.20",
     "next": "14.1.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-intersection-observer": "^9.8.1",
     "yup": "^1.4.0"
   },
   "devDependencies": {

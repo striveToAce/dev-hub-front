@@ -25,9 +25,16 @@ const FeedForm = () => {
   // Define onSubmit function to handle form submission
   const onSubmit = async (values: any) => {
     setLoading(true);
-    const signUpResponse = await axios.post("/api/feed/addUpdate", values);
+    for (let i = 0; i < 1000; i++) {
+      const signUpResponse = await axios.post("/api/feed/addUpdate", {
+        ...values,
+        title: values.title + i,
+        description: values.description + i,
+      });
+    }
+
     setLoading(false);
-    if (signUpResponse?.data?.status) router.push("/feeds");
+    //if (signUpResponse?.data?.status) router.push("/feeds");
   };
   // Initialize useFormik hook with form configuration
   const formik = useFormik({
