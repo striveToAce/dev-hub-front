@@ -2,33 +2,40 @@
 import { useEffect, useState } from "react";
 import { MotionDiv } from "../common/MotionDiv";
 import { userImages } from "@/utils/constants";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
+import { getFeedDetails } from "@/app/actions/feeds";
+import LineLoader from "../common/loader/LineLoader";
 
 const FeedDetail = () => {
   /*component states*/
   const [feed, setFeed] = useState(null);
-  const pathname = usePathname()
-  const feedId = pathname.split('/')[pathname.split('/').length-1]
+  const pathname = usePathname();
+  const feedId = pathname.split("/")[pathname.split("/").length - 1];
 
-
-
-
-  /*component variables*/ 
-  const variants = {
+  /*component variables*/
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   };
 
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
 
   /*component renders*/
   useEffect(() => {
-
+    if (feedId) getFeedDetails(feedId).then((data) => setFeed(data));
   }, [feedId]);
 
+  if (!feed) return <LineLoader />;
   return (
     <div>
       <MotionDiv
-        variants={variants}
+        variants={containerVariants}
         initial="hidden"
         transition={{
           delay: 0.3,
@@ -41,17 +48,27 @@ const FeedDetail = () => {
         animate="visible"
         className="block m-2 p-6 bg-white border border-gray-200 shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
-        <div>
-          <div className="text-2xl font-semibold line-clamp-2">
-            feed title
-          </div>
+        <MotionDiv
+          variants={itemVariants}
+          initial="hidden"
+          transition={{
+            delay: 0.3,
+            ease: "easeInOut",
+            duration: 0.5,
+          }}
+          viewport={{
+            amount: 0,
+          }}
+          animate="visible"
+        >
+          <div className="text-2xl font-semibold line-clamp-2">feed title</div>
           <div className="text-base text-gray-400 line-clamp-3">
             feed description
           </div>
           <div className="text-blue-600 text-xs font-semibold cursor-pointer">
             view in detail
           </div>
-        </div>
+        </MotionDiv>
         {/* author details */}
         <div className="mt-4">
           <div className="flex flex-row gap-2 items-center p-1">
