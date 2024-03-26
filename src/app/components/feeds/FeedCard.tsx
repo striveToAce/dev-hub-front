@@ -11,7 +11,7 @@ const FeedCard = ({ feed, index }: any) => {
       variants={variants}
       initial="hidden"
       transition={{
-        delay: index * 0.25,
+        delay: 0.3,
         ease: "easeInOut",
         duration: 0.5,
       }}
